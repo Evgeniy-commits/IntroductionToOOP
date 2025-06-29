@@ -22,6 +22,8 @@ public:
 	{
 		this -> y = y;
 	}
+
+
 };
 
 //#define STRUCT_POINT
