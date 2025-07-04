@@ -1,59 +1,45 @@
-#include<iostream>
-#include<cmath>
-
-using namespace std;
-
-class Distance
-{
-	double x;
-	double y;
-public:
-	double get_x()const
-	{
-		return x;
-	}
-	double get_y()const
-	{
-		return y;
-	}
-	void set_x(double x)
-	{
-		this->x = x;
-	}
-	void set_y(double y)
-	{
-		this->y = y;
-	}
-	double getDistance(double x , double y)
-	{
-		return sqrt(pow(x, 2) + pow(y, 2));
-	}
-
-
-
-};
-
-double distanceBetween(double x_1, double x_2, double y_1, double y_2);
+#include "Student.h"
 
 void main()
 {
 	setlocale(LC_ALL, "");
 	
-	Distance A;
-	A.set_x(3);
-	A.set_y(4);
-	cout << A.get_x() << "\t" << A.get_y() << endl;
-	cout << A.getDistance(A.get_x(), A.get_y()) << endl << endl;
+	//cout << "Успеваемость студента." << endl << endl;
+	//Student student("Петров А.И.", 3, new int[3]{10, 10, 9});
+	////cout << "После вызова конструктора" << endl;
 
-	double x_1 = 1;
-	double y_1 = 2;
-	double x_2 = 3;
-	double y_2 = 4;
-	cout << distanceBetween(x_1, y_1, x_2, y_2) << endl;
+	///*student.setMark(10, 0);
+	//student.setMark(10, 1);
+	//student.setMark(9, 2);*/
+	//
+	//cout << "Средний балл " << student.getName() << " : " << fixed 
+	//	<< setprecision(2) << student.getAver() << endl;
+	//_getch();
+	
+	
+	cout << "Успеваемость студента." << endl << endl;
 
+	const int size = 3;
+	Student* students = new Student[size]
+	{
+		{"Студент 1", 3, new int[3] {10, 10, 9}},
+		{"Студент 2", 3, new int[3] {8, 10, 8}},
+		{"Студент 3", 3, new int[3] {12, 10, 8}}
+	};
+
+	double sum = 0; 
+	for (Student* stud = students; stud < students + size; stud++)
+	{
+		double aver = stud->getAver();
+		cout << "Средний балл " << stud -> getName() << " : " << fixed
+			<< setprecision(2) << aver << endl;
+		sum += aver;
+	}
+	cout << endl;
+	
+	cout << "Средний балл по группе: " << " : " << fixed 
+		<< setprecision(2) << sum / size << endl;
+	delete[] students;
+	_getch();
 }
 
-double distanceBetween(double x_1, double x_2, double y_1, double y_2)
-{
-	return sqrt(pow(x_2 - x_1, 2) + pow(y_2 - y_1, 2));
-}
