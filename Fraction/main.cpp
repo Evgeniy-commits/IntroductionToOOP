@@ -3,6 +3,8 @@
 
 using namespace std;
 
+#define delimiter  "\n_____________________________________\n"
+
 class Fraction
 {
 	int integer;		//целая часть
@@ -87,6 +89,20 @@ public:
 	}
 
 	//Methods
+	Fraction& to_improper()
+	{
+		numerator += integer * denominator;
+		integer = 0;
+		return *this;
+	}
+
+	Fraction& to_proper()
+	{
+		integer += numerator / denominator;
+		numerator %= denominator;
+		return *this;
+	}
+
 	void print()const
 	{
 		if (integer) cout << integer;
@@ -101,7 +117,29 @@ public:
 	}
 };
 
-#define CONSTRACTORS_CHECK
+
+Fraction operator*(Fraction left, Fraction right)
+{
+	//left.to_improper();
+	//right.to_improper();
+	//Fraction result;
+	//result.set_numerator(left.get_numerator() * right.get_numerator());
+	//result.set_denominator(left.get_denominator() * right.get_denominator());
+	//return result;
+	/*Fraction result
+	(
+		left.get_numerator() * right.get_numerator(),
+		left.get_denominator() * right.get_denominator()
+	);*/
+	//result.to_proper();
+	return Fraction
+	(
+		left.to_improper().get_numerator() * right.to_improper().get_numerator(),
+		left.to_improper().get_denominator() * right.to_improper().get_denominator()
+	).to_proper();
+}
+
+//#define CONSTRACTORS_CHECK
 
 void main()
 {
@@ -121,4 +159,13 @@ void main()
 	D.print();
 #endif // CONSTRACTORS_CHECK
 
+	Fraction A(1, 2, 3);
+	A.print();
+	cout << delimiter << endl;
+	Fraction B(2, 3, 4);
+	B.print();
+	cout << delimiter << endl;
+	Fraction C = A * B;
+	C.print();
+	cout << delimiter << endl;
 }
