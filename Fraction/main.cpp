@@ -3,7 +3,6 @@
 #include<stdlib.h>
 
 using namespace std;
-//using std::cout;
 
 #define delimiter  "\n_____________________________________\n"
 
@@ -90,7 +89,7 @@ public:
 		return *this;
 	}
 
-	/*Fraction& operator+=(Fraction& right)
+	Fraction& operator+=(Fraction& right)
 	{
 		cout << "Compound Assignment += :\t\t" << endl;
 		Fraction Self = *this;
@@ -99,9 +98,42 @@ public:
 		numerator = numerator * right.denominator + right.numerator * denominator;
 		denominator = denominator * right.denominator;
 		return Self.to_proper();
-	}*/
+	}
 	
-	Fraction operator++(int)
+	Fraction& operator-=(Fraction& right)
+	{
+		cout << "Compound Assignment -= :\t\t" << endl;
+		Fraction Self = *this;
+		Self.to_improper();
+		right.to_improper();
+		numerator = numerator * right.denominator - right.numerator * denominator;
+		denominator = denominator * right.denominator;
+		return Self.to_proper();
+	}
+
+	Fraction& operator*=(Fraction& right)
+	{
+		cout << "Compound Assignment *= :\t\t" << endl;
+		Fraction Self = *this;
+		Self.to_improper();
+		right.to_improper();
+		numerator = numerator * right.numerator;
+		denominator = denominator * right.denominator;
+		return Self.to_proper();
+	}
+	
+	Fraction& operator/=(Fraction& right)
+	{
+		cout << "Compound Assignment /= :\t\t" << endl;
+		Fraction Self = *this;
+		Self.to_improper();
+		right.to_improper();
+		numerator = numerator * right.denominator;
+		denominator = denominator * right.numerator;
+		return Self.to_proper();
+	}
+
+	Fraction& operator++(int)
 	{
 		cout << "Increment ++ :\t\t" << endl;
 		Fraction inc = *this;
@@ -110,13 +142,13 @@ public:
 		return inc;
 	}
 
-	Fraction operator--(int)
+	Fraction& operator--(int)
 	{
 		cout << "Increment ++ :\t\t" << endl;
-		Fraction inc = *this;
-		inc.to_improper();
+		Fraction decr = *this;
+		decr.to_improper();
 		numerator = numerator - denominator;
-		return inc;
+		return decr;
 	}
 
 	//Methods
@@ -204,37 +236,37 @@ Fraction operator/(Fraction left, Fraction right)
 	).to_proper();
 }
 
-Fraction operator+=(Fraction& self, Fraction& right)
-{
-	cout << "Compound Assignment += :\t\t" << endl;
-	self.to_improper().set_numerator(self.to_improper().get_numerator() * right.to_improper().get_denominator() + right.to_improper().get_numerator() * self.to_improper().get_denominator());
-	self.to_improper().set_denominator(self.to_improper().get_denominator() * right.to_improper().get_denominator());
-	return self.to_proper();
-}
-
-Fraction operator-=(Fraction& self, Fraction& right)
-{
-	cout << "Compound Assignment -= :\t\t" << endl;
-	self.set_numerator(self.to_improper().get_numerator() * right.to_improper().get_denominator() - right.to_improper().get_numerator() * self.to_improper().get_denominator());
-	self.set_denominator(self.to_improper().get_denominator() * right.to_improper().get_denominator());
-	return self.to_proper();
-}
-
-Fraction operator*=(Fraction& self, Fraction& right)
-{
-	cout << "Compound Assignment *= :\t\t" << endl;
-	self.to_improper().set_numerator(self.to_improper().get_numerator() * right.to_improper().get_numerator());
-	self.to_improper().set_denominator(self.to_improper().get_denominator() * right.to_improper().get_denominator());
-	return self.to_proper();
-}
-
-Fraction operator/=(Fraction& self, Fraction& right)
-{
-	cout << "Compound Assignment /= :\t\t" << endl;
-	self.to_improper().set_numerator(self.to_improper().get_numerator() * right.to_improper().get_denominator());
-	self.to_improper().set_denominator(self.to_improper().get_denominator() * right.to_improper().get_numerator());
-	return self.to_proper();
-}
+//Fraction operator+=(Fraction& self, Fraction& right)
+//{
+//	cout << "Compound Assignment += :\t\t" << endl;
+//	self.to_improper().set_numerator(self.to_improper().get_numerator() * right.to_improper().get_denominator() + right.to_improper().get_numerator() * self.to_improper().get_denominator());
+//	self.to_improper().set_denominator(self.to_improper().get_denominator() * right.to_improper().get_denominator());
+//	return self.to_proper();
+//}
+//
+//Fraction operator-=(Fraction& self, Fraction& right)
+//{
+//	cout << "Compound Assignment -= :\t\t" << endl;
+//	self.set_numerator(self.to_improper().get_numerator() * right.to_improper().get_denominator() - right.to_improper().get_numerator() * self.to_improper().get_denominator());
+//	self.set_denominator(self.to_improper().get_denominator() * right.to_improper().get_denominator());
+//	return self.to_proper();
+//}
+//
+//Fraction operator*=(Fraction& self, Fraction& right)
+//{
+//	cout << "Compound Assignment *= :\t\t" << endl;
+//	self.to_improper().set_numerator(self.to_improper().get_numerator() * right.to_improper().get_numerator());
+//	self.to_improper().set_denominator(self.to_improper().get_denominator() * right.to_improper().get_denominator());
+//	return self.to_proper();
+//}
+//
+//Fraction operator/=(Fraction& self, Fraction& right)
+//{
+//	cout << "Compound Assignment /= :\t\t" << endl;
+//	self.to_improper().set_numerator(self.to_improper().get_numerator() * right.to_improper().get_denominator());
+//	self.to_improper().set_denominator(self.to_improper().get_denominator() * right.to_improper().get_numerator());
+//	return self.to_proper();
+//}
 
 bool operator==(Fraction& left, Fraction& right)
 {
@@ -344,7 +376,7 @@ void main()
 	C.to_improper().print();
 	C.to_proper().print();
 	D -= C;
-	D.print();
+	D.to_proper().print();
 #endif // COMPOUND ASSIGNMENTS
 
 #ifdef INCREMENT_DECREMENT
