@@ -133,7 +133,7 @@ public:
 		return Self.to_proper();
 	}
 
-	Fraction& operator++(int)
+	const Fraction operator++(int)
 	{
 		cout << "Increment ++ :\t\t" << endl;
 		Fraction inc = *this;
@@ -142,7 +142,7 @@ public:
 		return inc;
 	}
 
-	Fraction& operator--(int)
+	const Fraction operator--(int)
 	{
 		cout << "Increment ++ :\t\t" << endl;
 		Fraction decr = *this;
