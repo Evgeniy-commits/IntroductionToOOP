@@ -2,11 +2,13 @@
 #include<cmath>
 
 using namespace std;
-
+using std::cout;
 #define delimiter  "\n_____________________________________\n"
 
 class Fraction;
 Fraction operator*(Fraction left, Fraction right);
+Fraction operator/(const Fraction& left, const Fraction& right);
+Fraction operator+(Fraction left, Fraction right);
 
 class Fraction
 {
@@ -94,12 +96,27 @@ public:
 	Fraction& operator*=(const Fraction& right)
 	{
 		cout << "Compound Assignment *= :\t\t" << endl;
-		/*Fraction Self = *this;
-		Self.to_improper();
-		right.to_improper();
-		numerator = numerator * right.numerator;
-		denominator = denominator * right.denominator;*/
 		return *this = *this * right;
+	}
+
+	Fraction& operator/=(Fraction& right)
+	{
+		cout << "Compound Assignment /= :\t\t" << endl;
+		return *this = *this / right;
+	}
+
+	Fraction& operator++()
+	{
+		cout << "Increment ++ :\t\t" << endl;
+		++integer;
+		return *this;
+	}
+	const Fraction operator++(int)
+	{
+		cout << "Increment ++ :\t\t" << endl;
+		Fraction inc = *this;
+		integer++;
+		return inc;
 	}
 
 	//Methods
@@ -124,6 +141,24 @@ public:
 		swap(inverted.numerator, inverted.denominator);
 		return inverted;
 	}
+
+	Fraction& reduce()
+	{
+		int more, less, rest;
+		if (numerator > denominator) more = numerator, less = denominator;
+		else less = numerator, more = denominator;
+		do
+		{
+			rest = more % less;
+			more = less;
+			less = rest;
+		} while (rest);
+		int GCD = more; // наибольший общий делитель;
+		numerator /= GCD;
+		denominator /= GCD;
+		return *this;
+	}
+
 	void print()const
 	{
 		if (integer) cout << integer;
@@ -138,6 +173,14 @@ public:
 	}
 };
 
+Fraction operator+(Fraction left, Fraction right)
+{
+	return Fraction
+	(
+	left.to_improper().get_numerator() * right.to_improper().get_denominator() + right.to_improper().get_numerator() * left.to_improper().get_denominator(),
+	left.to_improper().get_denominator() * right.to_improper().get_denominator()
+	).to_proper();
+}
 
 Fraction operator*(Fraction left, Fraction right)
 {
@@ -145,7 +188,7 @@ Fraction operator*(Fraction left, Fraction right)
 	(
 	left.to_improper().get_numerator() * right.to_improper().get_numerator(),
 	left.to_improper().get_denominator() * right.to_improper().get_denominator()
-	).to_proper();
+	).to_proper().reduce();
 }
 
 Fraction operator/(const Fraction& left, const Fraction& right)
@@ -153,7 +196,13 @@ Fraction operator/(const Fraction& left, const Fraction& right)
 	return 	left * right.inverted();		
 }
 
+
+
 //#define CONSTRACTORS_CHECK
+#define ARITHMETIC OPERATORS
+//#define COMPOUND ASSIGNMENTS
+//#define INCREMENT_DECREMENT
+//#define COMPARISON OPERATORS
 
 void main()
 {
@@ -173,6 +222,7 @@ void main()
 	D.print();
 #endif // CONSTRACTORS_CHECK
 
+#ifdef ARITHMETIC OPERATORS
 	Fraction A(2, 3, 4);
 	A.print();
 	cout << delimiter << endl;
@@ -190,6 +240,26 @@ void main()
 	A *= B;
 	A.print();
 	cout << delimiter << endl;
+
+	A /= B;
+	A.print();
+	cout << delimiter << endl;
+
+	C = A + B;
+	C.print();
+	cout << delimiter << endl;
+#endif // ARITHMETIC OPERATORS
+
+#ifdef INCREMENT_DECREMENT
+	Fraction A(2, 3, 4);
+	A.print();
+
+	cout << delimiter << endl;
+	Fraction B = A++;
+	A.print();
+#endif // INCREMENT_DECREMENT
+
+
 }
 
 
