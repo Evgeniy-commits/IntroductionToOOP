@@ -26,6 +26,8 @@ void main()
 		{"Студент 2", 3, new int[3] {8, 10, 8}},
 		{"Студент 3", 3, new int[3] {12, 10, 8}}
 	};
+	Student stud = students[0];
+	//cout << stud << endl;
 
 	double sum = 0; 
 	for (Student* stud = students; stud < students + size; stud++)
