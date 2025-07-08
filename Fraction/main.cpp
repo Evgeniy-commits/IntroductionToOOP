@@ -1,4 +1,4 @@
-#include<iostream>
+п»ї#include<iostream>
 #include<cmath>
 
 using namespace std;
@@ -13,9 +13,9 @@ Fraction operator-(Fraction left, Fraction right);
 
 class Fraction
 {
-	int integer;		//целая часть
-	int numerator;		//числитель
-	int denominator;	//знаменатель
+	int integer;		//С†РµР»Р°СЏ С‡Р°СЃС‚СЊ
+	int numerator;		//С‡РёСЃР»РёС‚РµР»СЊ
+	int denominator;	//Р·РЅР°РјРµРЅР°С‚РµР»СЊ
 public:
 	int get_integer() const
 	{
@@ -187,7 +187,7 @@ public:
 			more = less;
 			less = rest;
 		} while (rest);
-		int GCD = more; // наибольший общий делитель;
+		int GCD = more; // РЅР°РёР±РѕР»СЊС€РёР№ РѕР±С‰РёР№ РґРµР»РёС‚РµР»СЊ;
 		numerator /= GCD;
 		denominator /= GCD;
 		return *this;
