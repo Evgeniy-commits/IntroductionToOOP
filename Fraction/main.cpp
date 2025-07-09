@@ -243,34 +243,36 @@ Fraction operator/(const Fraction& left, const Fraction& right)
 	return 	left * right.inverted();		
 }
 
-bool operator==(Fraction& left, Fraction& right)
+bool operator==(Fraction left, Fraction right)
 {
 	return left.to_improper().get_numerator() * right.to_improper().get_denominator() == left.to_improper().get_denominator() * right.to_improper().get_numerator();
 }
 
-bool operator!=(Fraction& left, Fraction& right)
+bool operator!=(const Fraction& left, const Fraction& right)
 {
 	return !(left == right);
 }
 
-bool operator>(Fraction& left, Fraction& right)
+bool operator>(Fraction left, Fraction right)
 {
 	return left.to_improper().get_numerator() * right.to_improper().get_denominator() > left.to_improper().get_denominator() * right.to_improper().get_numerator();
 }
 
-bool operator<(Fraction& left, Fraction& right)
+bool operator<(Fraction left, Fraction right)
 {
 	return left.to_improper().get_numerator() * right.to_improper().get_denominator() < left.to_improper().get_denominator() * right.to_improper().get_numerator();
 }
 
-bool operator>=(Fraction& left, Fraction& right)
+bool operator>=(const Fraction& left, const Fraction& right)
 {
-	return left.to_improper().get_numerator() * right.to_improper().get_denominator() >= left.to_improper().get_denominator() * right.to_improper().get_numerator();
+	return !(left < right);
+	//return left > right || left == right;
 }
 
-bool operator<=(Fraction& left, Fraction& right)
+bool operator<=(const Fraction& left, const Fraction& right)
 {
-	return left.to_improper().get_numerator() * right.to_improper().get_denominator() <= left.to_improper().get_denominator() * right.to_improper().get_numerator();
+	return !(left > right);
+	//return left < right || left == right;
 }
 
 
