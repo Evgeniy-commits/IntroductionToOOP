@@ -121,14 +121,14 @@ public:
 	Fraction& operator++()
 	{
 		cout << "Prefix Increment ++ :\t\t" << endl;
-		++integer;
+		integer++;
 		return *this;
 	}
 	
 	Fraction& operator--()
 	{
 		cout << "Prefix Decrement -- :\t\t" << endl;
-		--integer;
+		integer--;
 		return *this;
 	}
 
@@ -275,12 +275,25 @@ bool operator<=(const Fraction& left, const Fraction& right)
 	//return left < right || left == right;
 }
 
-
+std::ostream& operator<<(std::ostream& os, const Fraction& obj)
+{
+	if (obj.get_integer()) os << obj.get_integer();
+	if (obj.get_numerator())
+	{
+		if (obj.get_integer()) os << "(";
+		os << obj.get_numerator() << "/" << obj.get_denominator();
+		if (obj.get_integer()) os << ")";
+	}
+	else if (obj.get_integer() == 0) os << 0;
+	return os;
+}
 
 //#define CONSTRACTORS_CHECK
 //#define ARITHMETIC OPERATORS
 //#define INCREMENT_DECREMENT
-#define COMPARISON OPERATORS
+//#define COMPARISON OPERATORS
+//#define LOGICAL OPERATORS
+//#define STREAMS CHECK
 
 void main()
 {
@@ -355,4 +368,19 @@ cout << (A >= B) << endl;
 cout << (A <= B) << endl;
 	
 #endif // COMPARISON OPERATORS
+
+#ifdef LOGICAL OPERATORS
+//for (Fraction i(9, 1, 2); i > 0 ; --i)
+//{
+//	i.print();
+//}
+#endif // LOGICAL OPERATORS
+
+#ifdef STREAMS CHECK
+Fraction A(2, 3, 4);
+cout << "Введите простую дробь: ";
+cin >> A;
+cout << A << endl;
+#endif // STREAMS CHECK
+
 }
