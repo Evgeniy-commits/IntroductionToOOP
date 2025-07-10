@@ -51,7 +51,7 @@ public:
 		this->denominator = 1;
 		cout << "DefaultConstructor:\t\t" << this << endl;
 	}
-	Fraction(int integer)
+	explicit Fraction(int integer)
 	{
 		this->integer = integer;
 		this->numerator = 0;
@@ -112,7 +112,7 @@ public:
 		return *this = *this * right;
 	}
 
-	Fraction& operator/=(Fraction& right)
+	Fraction& operator/=(const Fraction& right)
 	{
 		cout << "Compound Assignment /= :\t\t" << endl;
 		return *this = *this / right;
@@ -147,6 +147,30 @@ public:
 		integer--;
 		return decr;
 	}
+
+	//Operators stream
+
+	friend std::ostream& operator<<(std::ostream& os, const Fraction& obj);
+	friend istream& operator>>(istream& is, Fraction& obj);
+	
+	// Type-cast operators
+
+	explicit operator int()const
+	{
+		return integer + numerator / denominator;
+	}
+
+	explicit operator double()const
+	{	
+		return integer + (double)numerator / denominator;
+	}
+
+	friend Fraction Dec_Fr_To_Simple_Fr(double number, Fraction& Res);
+	explicit operator Fraction()const
+	{
+		return Fraction(integer + numerator / denominator);
+	}
+
 	//Methods
 	Fraction& to_improper()
 	{
@@ -195,6 +219,11 @@ public:
 
 	void print()const
 	{
+		if (denominator == 0) 
+		{
+			cout << "Zero Division" << endl;
+			return;
+		}
 		if (integer) cout << integer;
 		if (numerator)
 		{
@@ -275,25 +304,16 @@ bool operator<=(const Fraction& left, const Fraction& right)
 	//return left < right || left == right;
 }
 
-std::ostream& operator<<(std::ostream& os, const Fraction& obj)
-{
-	if (obj.get_integer()) os << obj.get_integer();
-	if (obj.get_numerator())
-	{
-		if (obj.get_integer()) os << "(";
-		os << obj.get_numerator() << "/" << obj.get_denominator();
-		if (obj.get_integer()) os << ")";
-	}
-	else if (obj.get_integer() == 0) os << 0;
-	return os;
-}
-
 //#define CONSTRACTORS_CHECK
 //#define ARITHMETIC OPERATORS
 //#define INCREMENT_DECREMENT
 //#define COMPARISON OPERATORS
 //#define LOGICAL OPERATORS
 //#define STREAMS CHECK
+//#define TYPE_COVERSION_BASICS
+//#define CONVERTION_FROM_OTHER_TO_CLASS
+//#define CONVERTION_FROM_CLASS_TO_OTHER
+#define HAVE_A_NICE_DAY
 
 void main()
 {
@@ -377,10 +397,94 @@ cout << (A <= B) << endl;
 #endif // LOGICAL OPERATORS
 
 #ifdef STREAMS CHECK
-Fraction A(2, 3, 4);
+Fraction A;
 cout << "Введите простую дробь: ";
 cin >> A;
 cout << A << endl;
+//A.print();
 #endif // STREAMS CHECK
 
+
+#ifdef TYPE_COVERSION_BASICS
+int a = 2;	  //No conversion
+double b = 3; //Conversion from less to more
+int c = b;    //Convertion from more to less without data loss
+int d = 5.5;   //Convertion from more to less with data loss  
+#endif // TYPE_COVERSION_BASICS
+
+#ifdef CONVERTION_FROM_OTHER_TO_CLASS
+Fraction A = (Fraction)5;
+cout << A << endl;
+
+Fraction B;
+B = Fraction(8);
+cout << B << endl;
+#endif // CONVERTION_FROM_OTHER_TO_CLASS
+
+#ifdef CONVERTION_FROM_CLASS_TO_OTHER
+Fraction A(2, 3, 4);
+A.to_improper().print();
+int a = (int)A;
+cout << a << endl;
+
+double b = (double)A;
+cout << b << endl;
+#endif // CONVERTION_FROM_CLASS_TO_OTHER
+
+#ifdef HAVE_A_NICE_DAY
+
+Fraction A = Dec_Fr_To_Simple_Fr(2.333, A);
+cout << A << endl;
+#endif // HAVE_A_NICE_DAY
+
+
+}
+
+
+std::ostream& operator<<(std::ostream& os, const Fraction& obj)
+{
+	if (obj.denominator == 0)
+	{
+		os << "Zero Division Error" << endl;
+		return os;
+	}
+	if (obj.integer) os << obj.integer;
+	if (obj.numerator)
+	{
+		if (obj.integer) os << "(";
+		os << obj.numerator << "/" << obj.denominator;
+		if (obj.integer) os << ")";
+	}
+	else if (obj.integer == 0) os << 0;
+	return os;
+}
+
+istream& operator>>(istream& is, Fraction& obj)
+{
+	is >> obj.integer >> obj.numerator >> obj.denominator;
+	return is;
+}
+
+long gcd(long a, long b)
+{
+	if (a == 0)
+		return b;
+	else if (b == 0)
+		return a;
+	if (a < b)
+		return gcd(a, b % a);
+	else
+		return gcd(b, a % b);
+}
+
+Fraction Dec_Fr_To_Simple_Fr(double number, Fraction& Res)
+{
+	int integer = (int)number;
+	Res.integer = integer;
+	double fraction = number - integer;
+	const long precision = 1000000000; //точность
+	long gcd_ = gcd(round(fraction * precision), precision);
+	Res.denominator = int(precision / gcd_);
+	Res.numerator = int(round(fraction * precision) / gcd_);
+	return Res;
 }
