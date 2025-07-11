@@ -461,8 +461,6 @@ cout << b << endl;
 Fraction A = 3.33;
 cout << A << endl;
 #endif // HAVE_A_NICE_DAY
-
-
 }
 
 std::ostream& operator<<(std::ostream& os, const Fraction& obj)
