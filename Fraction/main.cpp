@@ -5,7 +5,7 @@
 #include<iomanip>
 
 #pragma GCC diagnostic push  
-#pragma GCC diagnostic ignored "4244"  
+#pragma GCC diagnostic ignored "4944"  
 #pragma GCC diagnostic pop 
 using namespace std;
 using std::cout;
@@ -334,10 +334,10 @@ bool operator<=(const Fraction& left, const Fraction& right)
 //#define INCREMENT_DECREMENT
 //#define COMPARISON OPERATORS
 //#define LOGICAL OPERATORS
-//#define STREAMS CHECK
+#define STREAMS CHECK
 //#define TYPE_COVERSION_BASICS
 //#define CONVERTION_FROM_OTHER_TO_CLASS
-#define CONVERTION_FROM_CLASS_TO_OTHER
+//#define CONVERTION_FROM_CLASS_TO_OTHER
 //#define HAVE_A_NICE_DAY
 
 void main()
@@ -465,9 +465,8 @@ cout << A << endl;
 
 }
 
-
 std::ostream& operator<<(std::ostream& os, const Fraction& obj)
-{
+{   
 	if (obj.denominator == 0)
 	{
 		os << "Zero Division Error" << endl;
@@ -484,8 +483,27 @@ std::ostream& operator<<(std::ostream& os, const Fraction& obj)
 	return os;
 }
 
-istream& operator>>(istream& is, Fraction& obj)
+std::istream& operator>>(std::istream& is, Fraction& obj)
 {
-	is >> obj.integer >> obj.numerator >> obj.denominator;
+	/*is >> obj.integer >> obj.numerator >> obj.denominator;
+	return is;*/
+	const int SIZE = 256; //размер буфера ввода
+	char buffer[SIZE] = {};
+	is.getline(buffer, SIZE);
+	int n = 0; //кол-во введенных чисел
+	int numbers[3] = {};
+	const char delimiters[] = "(/, )";
+	for (char* pch = strtok(buffer, delimiters); pch && n < 3; pch = strtok(NULL, delimiters))
+		numbers[n++] = atoi(pch);
+	for (int i = 0; i < n; i++) cout << numbers[i] << "\t"; cout << endl;
+
+	switch (n)
+	{
+	case 0: obj = Fraction(); break;
+	case 1:	obj = Fraction(numbers[0]); break;
+	case 2:	obj = Fraction(numbers[0], numbers[1]);	break;
+	case 3: obj = Fraction(numbers[0], numbers[1], numbers[2]);	break;
+	}
+
 	return is;
 }
