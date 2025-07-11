@@ -165,13 +165,14 @@ public:
 		return integer + (double)numerator / denominator;
 	}
 
-	friend Fraction Dec_Fr_To_Simple_Fr(double number, Fraction& Res);
 	explicit operator Fraction()const
 	{
-		return Fraction(integer + numerator / denominator);
+		return Fraction().Dec_Fr_To_Simple_Fr();
 	}
 
 	//Methods
+
+	Fraction& Dec_Fr_To_Simple_Fr(Fraction& number);
 	Fraction& to_improper()
 	{
 		numerator += abs(integer) * denominator;
@@ -433,7 +434,7 @@ cout << b << endl;
 
 #ifdef HAVE_A_NICE_DAY
 
-Fraction A = Dec_Fr_To_Simple_Fr(2.333, A);
+Fraction A = (Fraction) 2.333;
 cout << A << endl;
 #endif // HAVE_A_NICE_DAY
 
@@ -477,11 +478,12 @@ long gcd(long a, long b)
 		return gcd(b, a % b);
 }
 
-Fraction Dec_Fr_To_Simple_Fr(double number, Fraction& Res)
+Fraction::Fraction Dec_Fr_To_Simple_Fr(Fraction& number)
 {
+	Fraction Res;
 	int integer = (int)number;
 	Res.integer = integer;
-	double fraction = number - integer;
+	double fraction = (double)number - integer;
 	const long precision = 1000000000; //точность
 	long gcd_ = gcd(round(fraction * precision), precision);
 	Res.denominator = int(precision / gcd_);
