@@ -1,6 +1,9 @@
 ﻿#include<iostream>
 #include<cmath>
 #include<string>
+#include<conio.h>
+#include<iomanip>
+
 #pragma GCC diagnostic push  
 #pragma GCC diagnostic ignored "4244"  
 #pragma GCC diagnostic pop 
@@ -79,16 +82,17 @@ public:
 
 	Fraction(double number)
 	{
+		number += 1e-10;
 		integer = number;
 		number -= integer;
-		denominator = 1;
-		string str = to_string(number);
+		denominator = 1e+9;
+		/*string str = to_string(number);
 		for (int count = 0; count < (str.length() - 2); count++) 
 		{
 			number *= 10;
 			denominator *= 10;
-		} 
-		numerator = (int)number;
+		} */
+		numerator = number * denominator;
 		reduce();
 		cout << "doubleConstructor:\t" << this << endl;
 	}
@@ -454,7 +458,7 @@ cout << b << endl;
 
 #ifdef HAVE_A_NICE_DAY
 
-Fraction A = 2.3;
+Fraction A = 3.33;
 cout << A << endl;
 #endif // HAVE_A_NICE_DAY
 
