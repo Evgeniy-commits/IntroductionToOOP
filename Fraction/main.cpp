@@ -337,8 +337,8 @@ bool operator<=(const Fraction& left, const Fraction& right)
 //#define STREAMS CHECK
 //#define TYPE_COVERSION_BASICS
 //#define CONVERTION_FROM_OTHER_TO_CLASS
-//#define CONVERTION_FROM_CLASS_TO_OTHER
-#define HAVE_A_NICE_DAY
+#define CONVERTION_FROM_CLASS_TO_OTHER
+//#define HAVE_A_NICE_DAY
 
 void main()
 {
