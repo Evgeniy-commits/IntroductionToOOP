@@ -76,8 +76,9 @@ public:
 
 	Fraction(double number)
 	{
+		double intprt = 0;
 		integer = (int)number;
-		number -= integer;
+		number = modf(number, &intprt);
 		denominator = 1;
 		do
 		{
