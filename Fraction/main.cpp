@@ -78,13 +78,13 @@ public:
 	{
 		integer = (int)number;
 		number -= integer;
-
-		while ((number - int(number)) != 0)
+		denominator = 1;
+		do
 		{
 			number *= 10;
 			denominator *= 10;
-		}
-		numerator = number;
+		} while ((round(number) - int(number)) != 0);
+		numerator = (int)number;
 		reduce();
 		cout << "doubleConstructor:\t" << this << endl;
 	}
@@ -450,7 +450,7 @@ cout << b << endl;
 
 #ifdef HAVE_A_NICE_DAY
 
-Fraction A = 2.75;
+Fraction A = 2.22;
 cout << A << endl;
 #endif // HAVE_A_NICE_DAY
 
