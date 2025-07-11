@@ -1,6 +1,9 @@
 ﻿#include<iostream>
 #include<cmath>
-
+#include<string>
+#pragma GCC diagnostic push  
+#pragma GCC diagnostic ignored "4244"  
+#pragma GCC diagnostic pop 
 using namespace std;
 using std::cout;
 #define delimiter  "\n_____________________________________\n"
@@ -76,15 +79,15 @@ public:
 
 	Fraction(double number)
 	{
-		double intprt = 0;
-		integer = (int)number;
-		number = modf(number, &intprt);
+		integer = number;
+		number -= integer;
 		denominator = 1;
-		do
+		string str = to_string(number);
+		for (int count = 0; count < (str.length() - 2); count++) 
 		{
 			number *= 10;
 			denominator *= 10;
-		} while ((round(number) - int(number)) != 0);
+		} 
 		numerator = (int)number;
 		reduce();
 		cout << "doubleConstructor:\t" << this << endl;
@@ -169,11 +172,11 @@ public:
 
 	friend std::ostream& operator<<(std::ostream& os, const Fraction& obj);
 	friend istream& operator>>(istream& is, Fraction& obj);
-	
+		
 	// Type-cast operators
 
 	explicit operator int()const
-	{
+	{ 
 		return integer + numerator / denominator;
 	}
 
@@ -451,7 +454,7 @@ cout << b << endl;
 
 #ifdef HAVE_A_NICE_DAY
 
-Fraction A = 2.22;
+Fraction A = 2.3;
 cout << A << endl;
 #endif // HAVE_A_NICE_DAY
 
@@ -482,4 +485,3 @@ istream& operator>>(istream& is, Fraction& obj)
 	is >> obj.integer >> obj.numerator >> obj.denominator;
 	return is;
 }
-
