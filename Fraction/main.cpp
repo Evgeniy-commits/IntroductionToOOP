@@ -11,6 +11,7 @@ Fraction operator/(const Fraction& left, const Fraction& right);
 Fraction operator+(Fraction left, Fraction right);
 Fraction operator-(Fraction left, Fraction right);
 
+
 class Fraction
 {
 	int integer;		//целая часть
@@ -71,6 +72,21 @@ public:
 		this->numerator = numerator;
 		this -> set_denominator(denominator);
 		cout << "Constructor:\t\t" << this << endl;
+	}
+
+	Fraction(double number)
+	{
+		integer = (int)number;
+		number -= integer;
+
+		while ((number - int(number)) != 0)
+		{
+			number *= 10;
+			denominator *= 10;
+		}
+		numerator = number;
+		reduce();
+		cout << "doubleConstructor:\t" << this << endl;
 	}
 	Fraction(const Fraction& other)
 	{
@@ -165,14 +181,14 @@ public:
 		return integer + (double)numerator / denominator;
 	}
 
-	explicit operator Fraction()const
+	explicit operator Fraction() const
 	{
-		return Fraction().Dec_Fr_To_Simple_Fr();
+		return *this;
 	}
 
 	//Methods
 
-	Fraction& Dec_Fr_To_Simple_Fr(Fraction& number);
+	
 	Fraction& to_improper()
 	{
 		numerator += abs(integer) * denominator;
@@ -434,7 +450,7 @@ cout << b << endl;
 
 #ifdef HAVE_A_NICE_DAY
 
-Fraction A = (Fraction) 2.333;
+Fraction A = 2.75;
 cout << A << endl;
 #endif // HAVE_A_NICE_DAY
 
@@ -466,27 +482,3 @@ istream& operator>>(istream& is, Fraction& obj)
 	return is;
 }
 
-long gcd(long a, long b)
-{
-	if (a == 0)
-		return b;
-	else if (b == 0)
-		return a;
-	if (a < b)
-		return gcd(a, b % a);
-	else
-		return gcd(b, a % b);
-}
-
-Fraction::Fraction Dec_Fr_To_Simple_Fr(Fraction& number)
-{
-	Fraction Res;
-	int integer = (int)number;
-	Res.integer = integer;
-	double fraction = (double)number - integer;
-	const long precision = 1000000000; //точность
-	long gcd_ = gcd(round(fraction * precision), precision);
-	Res.denominator = int(precision / gcd_);
-	Res.numerator = int(round(fraction * precision) / gcd_);
-	return Res;
-}
