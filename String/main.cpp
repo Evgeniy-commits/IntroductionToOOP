@@ -106,7 +106,7 @@ String& String::operator=(const String& other)
 	return *this;
 }
 
- String operator+(const String& left, const String& right)
+String operator+(const String& left, const String& right)
 {
 	int length = strlen(left.str) + strlen(right.str);
 	char* buffer = new char[length + 1];
@@ -114,9 +114,7 @@ String& String::operator=(const String& other)
 		buffer[i] = left.str[i];
 	for (int i = 0; i < length; i++)
 		buffer[i + strlen(left.str)] = right.str[i];
-	String str = buffer;
-	delete[] buffer;
-	return str;
+	return buffer;
 }
 
 std::ostream& operator<<(std::ostream& os, const String& other) 
