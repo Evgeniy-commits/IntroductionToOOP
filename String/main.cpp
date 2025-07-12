@@ -1,12 +1,11 @@
-#include<iostream>
-#include <fstream>
+ï»¿#include<iostream>
 #include<cmath>
 #include<string>
 #include<conio.h>
 #include<iomanip>
 
 using namespace std;
-//using std::cout;
+
 #define delimiter  "\n_____________________________________\n"
 
 class String
@@ -39,9 +38,9 @@ void main()
 	String Str_1{};
 	String Str_2{};
 	String Str_3{};
-	cout << "Ââåäèòå ñðîêó: " << endl; cin >> Str_1 ;
-	cout << "Áîëüøå ñðîê: " << endl; cin >> Str_2 ;
-	cout << "Åùå Áîëüøå ñðîê: " << endl; cin >> Str_3 ;
+	cout << "Ð’Ð²ÐµÐ´Ð¸Ñ‚Ðµ ÑÑ€Ð¾ÐºÑƒ: " << endl; cin >> Str_1 ;
+	cout << "Ð‘Ð¾Ð»ÑŒÑˆÐµ ÑÑ€Ð¾Ðº: " << endl; cin >> Str_2 ;
+	cout << "Ð•Ñ‰Ðµ Ð‘Ð¾Ð»ÑŒÑˆÐµ ÑÑ€Ð¾Ðº: " << endl; cin >> Str_3 ;
 	cout << Str_1 + Str_2 + Str_3 << endl;
 	
 }
@@ -49,14 +48,14 @@ void main()
 String::String()
 {
 	str = nullptr;
- 	cout << "Îòðàáîòàë êîíñòðóêòîð 1: " << this << endl;
+ 	cout << "ÐžÑ‚Ñ€Ð°Ð±Ð¾Ñ‚Ð°Ð» ÐºÐ¾Ð½ÑÑ‚Ñ€ÑƒÐºÑ‚Ð¾Ñ€ 1: " << this << endl;
 	system("pause");
 }
 
 String::String(const char* str)
 {
 	createstr(str);
-	cout << "Îòðàáîòàë êîíñòðóêòîð 2: " << str << endl;
+	cout << "ÐžÑ‚Ñ€Ð°Ð±Ð¾Ñ‚Ð°Ð» ÐºÐ¾Ð½ÑÑ‚Ñ€ÑƒÐºÑ‚Ð¾Ñ€ 2: " << str << endl;
  	system("pause");
 }
 
@@ -70,7 +69,7 @@ String::String(const String& other)
 
 String::~String()
 {
-	cout << "Îòðàáîòàë äåñòðóêòîð" << str << endl;
+	cout << "ÐžÑ‚Ñ€Ð°Ð±Ð¾Ñ‚Ð°Ð» Ð´ÐµÑÑ‚Ñ€ÑƒÐºÑ‚Ð¾Ñ€" << str << endl;
 	if (str != nullptr) delete[] str;
 	system("pause");
 }
@@ -132,7 +131,6 @@ std::istream& operator>>(std::istream& is, String& other)
 	other.str = new char[length + 1] {};
 	for (int i = 0; i < length; i++) other.str[i] = buffer[i];
 	other.str[length] = '\0';
-	//delete[] buffer;
 	return is;
 }
 	
