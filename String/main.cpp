@@ -1,8 +1,8 @@
 ﻿#include<iostream>
-#include<cmath>
+//#include<cmath>
 #include<string>
 #include<conio.h>
-#include<iomanip>
+#include<Windows.h>
 
 using namespace std;
 
@@ -48,14 +48,14 @@ void main()
 String::String()
 {
 	str = nullptr;
- 	cout << "Отработал конструктор 1: " << this << endl;
+ 	cout << "Отработал конструктор 1:\t\t " << this << endl;
 	system("pause");
 }
 
 String::String(const char* str)
 {
 	createstr(str);
-	cout << "Отработал конструктор 2: " << str << endl;
+	cout << "Отработал конструктор 2:\t\t" << str << endl;
  	system("pause");
 }
 
@@ -69,7 +69,7 @@ String::String(const String& other)
 
 String::~String()
 {
-	cout << "Отработал деструктор" << str << endl;
+	cout << "Отработал деструктор:\t\t" <<str << endl;
 	if (str != nullptr) delete[] str;
 	system("pause");
 }
@@ -126,11 +126,14 @@ std::istream& operator>>(std::istream& is, String& other)
 {
 	const int n = 256;
 	char buffer[n] = {};
+	SetConsoleCP(1251);
 	is.getline(buffer, n);
+	SetConsoleCP(866);
 	int length = strlen(buffer);
 	other.str = new char[length + 1] {};
 	for (int i = 0; i < length; i++) other.str[i] = buffer[i];
 	other.str[length] = '\0';
+	//String(other.str);
 	return is;
 }
 	
