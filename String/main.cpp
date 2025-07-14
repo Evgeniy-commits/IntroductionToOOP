@@ -41,7 +41,7 @@ void main()
 	cout << "Введите сроку: " << endl; cin >> Str_1 ;
 	cout << "Больше срок: " << endl; cin >> Str_2 ;
 	cout << "Еще Больше срок: " << endl; cin >> Str_3 ;
-	cout << Str_1 + Str_2 + Str_3 << endl;
+	cout << Str_1 + " "  + Str_2 + " "  + Str_3 << endl;
 	
 }
 

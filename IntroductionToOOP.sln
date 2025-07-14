@@ -13,6 +13,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Fraction", "Fraction\Fracti
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "String", "String\String.vcxproj", "{D7225E50-649C-4164-9FEC-A626BCED500E}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "String classwork", "String classwork\String classwork.vcxproj", "{62130A45-9B97-4026-B34F-3FE6FBA01B7E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -61,6 +63,14 @@ Global
 		{D7225E50-649C-4164-9FEC-A626BCED500E}.Release|x64.Build.0 = Release|x64
 		{D7225E50-649C-4164-9FEC-A626BCED500E}.Release|x86.ActiveCfg = Release|Win32
 		{D7225E50-649C-4164-9FEC-A626BCED500E}.Release|x86.Build.0 = Release|Win32
+		{62130A45-9B97-4026-B34F-3FE6FBA01B7E}.Debug|x64.ActiveCfg = Debug|x64
+		{62130A45-9B97-4026-B34F-3FE6FBA01B7E}.Debug|x64.Build.0 = Debug|x64
+		{62130A45-9B97-4026-B34F-3FE6FBA01B7E}.Debug|x86.ActiveCfg = Debug|Win32
+		{62130A45-9B97-4026-B34F-3FE6FBA01B7E}.Debug|x86.Build.0 = Debug|Win32
+		{62130A45-9B97-4026-B34F-3FE6FBA01B7E}.Release|x64.ActiveCfg = Release|x64
+		{62130A45-9B97-4026-B34F-3FE6FBA01B7E}.Release|x64.Build.0 = Release|x64
+		{62130A45-9B97-4026-B34F-3FE6FBA01B7E}.Release|x86.ActiveCfg = Release|Win32
+		{62130A45-9B97-4026-B34F-3FE6FBA01B7E}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
