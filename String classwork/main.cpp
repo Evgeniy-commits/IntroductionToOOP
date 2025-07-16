@@ -66,6 +66,7 @@ public:
 
 	String& operator=(const String& obj)
 	{
+		this->~String();
 		size = obj.size;
 		//this->str = obj.str; //Shallow copy
 		str = new char[size];

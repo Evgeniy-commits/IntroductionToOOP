@@ -25,27 +25,35 @@ public:
 		return cols;
 	}
 
-	/*const int** get_matrix() const
+		
+	//			Constructors
+	Matrix() : rows(3), cols(3)
 	{
-		return matrix;
+		createRandomMatrix();
+		cout << "Default Constructor:\t\t" << this << endl;
+	}
+	
+	Matrix(int i) : rows(i), cols(2)
+	{
+		createMatrix();
+		cout << "Constructor_1:\t\t" << this << endl;
 	}
 
-	int** get_matrix()
+	Matrix(int i, int j) : rows(i), cols(j)
 	{
-		return matrix;
-	}*/
-	
-	//			Constructors
-	Matrix(int rows, int cols)
+		createRandomMatrix();
+		cout << "Constructor_2:\t\t" << this << endl;
+	}
+
+	Matrix (const Matrix& other)
 	{
-		this->rows = rows;
-		this->cols = cols;
-		this->matrix = new int* [rows] {};
+		matrix = new int* [rows] {};
 		for (int i = 0; i < rows; i++)
-		{
 			matrix[i] = new int[cols] {};
-		}
-		cout << "Default Constructor:\t" << this << endl;
+		    int k = 0;
+			for (int j = 0; j < cols; j++)
+				matrix[k++][j] = other.matrix[k++][j];
+		cout << "CopyConstructor:\t" << this << endl;
 	}
 
 	~Matrix()
@@ -61,8 +69,45 @@ public:
 		cout << "Destructor:\t" << this << endl;
 	}
 
+	//			Operators
+	
+	Matrix& operator=(const Matrix& other)
+	{
+		this->~Matrix();
+		this->rows = other.rows;
+		this->cols = other.cols;
+		this->matrix = new int* [rows] {};
+		for (int i = 0; i < rows; i++)
+		{
+			matrix[i] = new int[cols] {};
+			for (int j = 0; j < cols; j++)
+				matrix[i][j] = other.matrix[i][j];
+		}
+		cout << "CopyAssignment:\t" << this << endl;
+		return *this;
+	}
 
 	//			Method
+
+	void createMatrix()
+	{
+		matrix = new int* [rows] {};
+		for (int i = 0; i < rows; i++)
+			matrix[i] = new int[cols] {};
+	}
+	
+	void createRandomMatrix()
+	{
+		matrix = new int* [rows] {};
+		for (int i = 0; i < rows; i++)
+		{
+			matrix[i] = new int[cols] {};
+			for (int j = 0; j < cols; j++)
+				matrix[i][j] = rand() % 10;
+		}
+	}
+	
+
 	void print() const
 	{
 		for (int i = 0; i < rows; i++)
@@ -85,6 +130,18 @@ void main()
 
 	Matrix m_1 (3, 3);
 	m_1.print();
+	cout << delimiter << endl;
 
+	Matrix B(3, 4);
+	B.print();
+	Matrix C = B;
+	B.print();
+	cout << delimiter << endl;
+
+	Matrix D(3, 4);
+	D.print();
+	D = B;
+	D.print();
+	cout << delimiter << endl;
 #endif // CONSTRACTORS_CHECK
 }
