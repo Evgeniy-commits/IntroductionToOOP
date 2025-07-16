@@ -79,6 +79,7 @@ public:
 	
 	Matrix& operator=(const Matrix& other)
 	{
+		this->~Matrix();
 		this->rows = other.rows;
 		this->cols = other.cols;
 		this->matrix = new int* [rows] {};
