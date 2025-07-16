@@ -161,9 +161,9 @@ void main()
 	Matrix B(3, 3);
 	B.print();
 	cout << delimiter << endl;
-	Matrix C(3, 3);
-	C.print();
-	cout << delimiter << endl;
+	Matrix C;
+	//C.print();
+	//cout << delimiter << endl;
 	C = A + B;
 	C.print();
 	cout << delimiter << endl;
