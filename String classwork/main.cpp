@@ -1,4 +1,4 @@
-#include<iostream>
+ï»¿#include<iostream>
 //#include<cmath>
 //#include<string>
 //#include<conio.h>
@@ -14,8 +14,8 @@ std::ostream& operator<<(std::ostream& os, const String& obj);
 class String
 {
 private:
-	int size;	// ðàçìåð ñòðîêè â áàéòàõ(ñ ó÷åòîì íóëÿ)
-	char* str; // àäðåñ ñòðîêè â äèíàìè÷ ïàìÿòè
+	int size;	// Ñ€Ð°Ð·Ð¼ÐµÑ€ ÑÑ‚Ñ€Ð¾ÐºÐ¸ Ð² Ð±Ð°Ð¹Ñ‚Ð°Ñ…(Ñ ÑƒÑ‡ÐµÑ‚Ð¾Ð¼ Ð½ÑƒÐ»Ñ)
+	char* str; // Ð°Ð´Ñ€ÐµÑ ÑÑ‚Ñ€Ð¾ÐºÐ¸ Ð² Ð´Ð¸Ð½Ð°Ð¼Ð¸Ñ‡ Ð¿Ð°Ð¼ÑÑ‚Ð¸
 
 public:
 
@@ -66,7 +66,6 @@ public:
 
 	String& operator=(const String& obj)
 	{
-		this->~String();
 		size = obj.size;
 		//this->str = obj.str; //Shallow copy
 		str = new char[size];

@@ -1,8 +1,4 @@
-#include<iostream>
-//#include<cmath>
-//#include<string>
-//#include<conio.h>
-//#include<Windows.h>
+﻿#include<iostream>
 
 using namespace std;
 
@@ -27,32 +23,42 @@ public:
 
 		
 	//			Constructors
-	Matrix() : rows(3), cols(3)
+	Matrix() : rows(2), cols()
 	{
-		createRandomMatrix();
+		createMatrix();
 		cout << "Default Constructor:\t\t" << this << endl;
 	}
 	
-	Matrix(int i) : rows(i), cols(2)
+	Matrix(int rows) : rows(rows), cols(1)
 	{
 		createMatrix();
 		cout << "Constructor_1:\t\t" << this << endl;
 	}
 
-	Matrix(int i, int j) : rows(i), cols(j)
+	Matrix(int rows, int cols)
 	{
+		this -> rows = rows;
+		this -> cols = cols;
 		createRandomMatrix();
 		cout << "Constructor_2:\t\t" << this << endl;
 	}
 
 	Matrix (const Matrix& other)
 	{
-		matrix = new int* [rows] {};
+		rows = other.rows;
+		cols = other.cols;
+		matrix = new int* [rows];
 		for (int i = 0; i < rows; i++)
+		{
 			matrix[i] = new int[cols] {};
-		    int k = 0;
+		}
+		for (int i = 0; i < rows; i++)
+		{
 			for (int j = 0; j < cols; j++)
-				matrix[k++][j] = other.matrix[k++][j];
+			{
+				matrix[i][j] = other.matrix[i][j];
+			}
+		}
 		cout << "CopyConstructor:\t" << this << endl;
 	}
 
@@ -73,20 +79,21 @@ public:
 	
 	Matrix& operator=(const Matrix& other)
 	{
-		this->~Matrix();
 		this->rows = other.rows;
 		this->cols = other.cols;
 		this->matrix = new int* [rows] {};
 		for (int i = 0; i < rows; i++)
 		{
-			matrix[i] = new int[cols] {};
-			for (int j = 0; j < cols; j++)
-				matrix[i][j] = other.matrix[i][j];
+			this->matrix[i] = new int[cols] {};
+			memcpy(this->matrix[i], other.matrix[i], cols * sizeof(int));
 		}
+		
 		cout << "CopyAssignment:\t" << this << endl;
 		return *this;
 	}
 
+	Matrix operator+(Matrix& right);
+	
 	//			Method
 
 	void createMatrix()
@@ -121,14 +128,14 @@ public:
 	}
 };
 
-#define CONSTRACTORS_CHECK
-
+//#define CONSTRACTORS_CHECK
+#define ARITHMETIC_OPERATORS
 void main()
 {
 	setlocale(LC_ALL, "");
 #ifdef CONSTRACTORS_CHECK
 
-	Matrix m_1 (3, 3);
+	/*Matrix m_1 (3, 3);
 	m_1.print();
 	cout << delimiter << endl;
 
@@ -136,12 +143,54 @@ void main()
 	B.print();
 	Matrix C = B;
 	B.print();
-	cout << delimiter << endl;
-
-	Matrix D(3, 4);
+	cout << delimiter << endl;*/
+	
+	Matrix B(3, 4);
+	B.print();
+	Matrix D;
 	D.print();
 	D = B;
 	D.print();
 	cout << delimiter << endl;
 #endif // CONSTRACTORS_CHECK
+
+#ifdef ARITHMETIC_OPERATORS
+	Matrix A(3, 3);
+	A.print();
+	cout << delimiter << endl;
+	Matrix B(3, 3);
+	B.print();
+	cout << delimiter << endl;
+	Matrix C(3, 3);
+	C.print();
+	cout << delimiter << endl;
+	C = A + B;
+	C.print();
+	cout << delimiter << endl;
+#endif // ARITHMETIC_OPERATORS
+
+}
+
+Matrix Matrix :: operator+(Matrix& right)
+{
+	cout << "OPERATOR+ \t\t" << endl;
+	this->rows = rows;
+	this->cols = cols;
+	if (rows != right.rows || cols != right.cols)
+	{
+		cout << "Matrix sizes do not equal.";
+		return *this;
+	}
+	
+	Matrix result(rows, cols);
+	result.print();
+
+	for (int i = 0; i < rows; i++)
+	{
+		for (int j = 0; j < cols; j++) 
+		{
+			result.matrix[i][j] = matrix[i][j] + right.matrix[i][j];
+		}
+	}
+	return result;
 }
