@@ -76,6 +76,32 @@ public:
 		return *this;
 	}
 
+	String& operator=(String&& other) noexcept
+	{
+		//проверяем, что this != other
+		if (this == &other) return *this;
+		//удаляем старую динамич память
+		delete[] str;
+		//shallow copy
+		this->size = other.size;
+		this->str = other.str;
+		//обнуляем принимаемый объект
+		other.size = 0;
+		other.str = nullptr;
+		cout << "MoveAssignment:\t\t" << this << endl;
+		return *this;
+	}
+	//            MOVE_METHODS
+	String (String&& other) noexcept
+	{
+		this->size = other.size;
+		this->str = other.str;
+		//обнуляем принимаемый объект, д/т/ч предотвратить его удаление деструктором
+		other.size = 0;
+		other.str = nullptr;
+		cout << "MoveConstructor:\t\t" << this << endl;
+	}
+
 	~String()
 	{
 		delete[] str;
@@ -93,6 +119,9 @@ public:
 	{
 		return str[i];
 	}
+
+	
+
 
 };
 
@@ -114,9 +143,9 @@ std::ostream& operator<<(std::ostream& os, const String& obj)
 }
 
 
-#define CONSTRACTORS_CHECK 
+//#define CONSTRACTORS_CHECK 
 //#define COPY_SEMANTIC 
-
+#define MOVE_METHODS
 void main()
 {
 	setlocale(LC_ALL, "");
@@ -151,6 +180,19 @@ void main()
 	cout << str3 << endl;
 	cout << delimiter << endl;
 #endif // COPY_SEMANTIC
+
+#ifdef MOVE_METHODS
+	String str3 = "Hello";
+	cout << str3 << endl;
+	cout << delimiter << endl;
+	String str4{ "World" };
+	cout << str4 << endl;
+	cout << delimiter << endl;
+	String str5;
+	str5 = str3 + str4;
+	cout << delimiter << endl;
+	cout << str5 << endl;
+#endif // MOVE_METHODS
 
 
 }
