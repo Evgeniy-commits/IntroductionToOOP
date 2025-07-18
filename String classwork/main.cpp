@@ -34,10 +34,10 @@ public:
 		return str;
 	}
 
-    explicit String(int size = 80)
+	explicit String(int size = 80) : size(size), str(new char[size] {})
 	{
-		this->size = size;
-		this->str = new char[size] {};
+		//this->size = size;
+		//this->str = new char[size] {};
 		cout << "DefaultConstruktor:\t" << this << endl;
 	}
 
@@ -47,19 +47,19 @@ public:
 		cout << "Str:\t" << str << endl;
 	}
 
-	String(const char* str)
+	String(const char* str) : size(strlen(str) + 1), str(new char[size] {})
 	{
-		this->size = strlen(str) + 1;
-		this->str = new char[size] {};
+		//this->size = strlen(str) + 1;
+		//this->str = new char[size] {};
 		for (int i = 0; i < size; i++) this->str[i]	= str[i];
 		cout << "SingleArgumentConstructor:\t" << this << endl;
 	}
 
-	String(const String& obj)
+	String(const String& obj) : size(obj.size), str(new char[size] {})
 	{
-		size = obj.size;
-		//this->str = obj.str; //Shallow copy
-		str = new char[size];
+		//size = obj.size;
+		////this->str = obj.str; //Shallow copy
+		//str = new char[size];
 		for (int i = 0; i < size; i++) str[i] = obj.str[i];
 		cout << "CopyConstructor:\t\t" << this << endl;
 	}
@@ -92,10 +92,10 @@ public:
 		return *this;
 	}
 	//            MOVE_METHODS
-	String (String&& other) noexcept
+	String (String&& other) noexcept : size(other.size), str(other.str)
 	{
-		this->size = other.size;
-		this->str = other.str;
+		//this->size = other.size;
+		//this->str = other.str;
 		//обнуляем принимаемый объект, д/т/ч предотвратить его удаление деструктором
 		other.size = 0;
 		other.str = nullptr;
@@ -227,6 +227,11 @@ void main()
 	
 	String str10{ str9 };	//вызов CopyConstructor
 	str10.print();
-
 	//Фигурные скобки необходимо использовать с большой осторожностью
+
+	String str11 = str3 + str8;
+	str11.print();
+	
+	
 }
+
