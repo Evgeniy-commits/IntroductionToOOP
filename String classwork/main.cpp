@@ -47,7 +47,7 @@ public:
 		cout << "Str:\t" << str << endl;
 	}
 
-	String(const char* str) : size(strlen(str) + 1), str(new char[size] {})
+	String(const char* str) : String(strlen(str) + 1)
 	{
 		//this->size = strlen(str) + 1;
 		//this->str = new char[size] {};
@@ -55,12 +55,12 @@ public:
 		cout << "SingleArgumentConstructor:\t" << this << endl;
 	}
 
-	String(const String& obj) : size(obj.size), str(new char[size] {})
+	String(const String& other) : String(other.str)
 	{
 		//size = obj.size;
 		////this->str = obj.str; //Shallow copy
 		//str = new char[size];
-		for (int i = 0; i < size; i++) str[i] = obj.str[i];
+		//for (int i = 0; i < size; i++) str[i] = obj.str[i];
 		cout << "CopyConstructor:\t\t" << this << endl;
 	}
 
