@@ -7,8 +7,7 @@
 using namespace std;
 
 #define delimiter  "\n_____________________________________\n"
-class String;
-std::ostream& operator<<(std::ostream& os, const String& obj);
+
 
 
 class String
@@ -19,111 +18,125 @@ private:
 
 public:
 
-	int get_size() const
-	{
-		return size;
-	}
-
-	const char* get_str() const
-	{
-		return str;
-	}
-
-	char* get_str()
-	{
-		return str;
-	}
-
-	explicit String(int size = 80) : size(size), str(new char[size] {})
-	{
-		//this->size = size;
-		//this->str = new char[size] {};
-		cout << "DefaultConstruktor:\t" << this << endl;
-	}
-
-	void print() const
-	{
-		cout << "Size:\t" << size << endl;
-		cout << "Str:\t" << str << endl;
-	}
-
-	String(const char* str) : String(strlen(str) + 1)
-	{
-		//this->size = strlen(str) + 1;
-		//this->str = new char[size] {};
-		for (int i = 0; i < size; i++) this->str[i]	= str[i];
-		cout << "SingleArgumentConstructor:\t" << this << endl;
-	}
-
-	String(const String& other) : String(other.str)
-	{
-		//size = obj.size;
-		////this->str = obj.str; //Shallow copy
-		//str = new char[size];
-		//for (int i = 0; i < size; i++) str[i] = obj.str[i];
-		cout << "CopyConstructor:\t\t" << this << endl;
-	}
-
-	String& operator=(const String& obj)
-	{
-		if (this == &obj) return *this;
-		this->~String();
-		size = obj.size;
-		//this->str = obj.str; //Shallow copy
-		str = new char[size];
-		for (int i = 0; i < size; i++) str[i] = obj.str[i];
-		cout << "CopyAssignment:\t\t" << this << endl;
-		return *this;
-	}
-
-	String& operator=(String&& other) noexcept
-	{
-		//проверяем, что this != other
-		if (this == &other) return *this;
-		//удаляем старую динамич память
-		delete[] str;
-		//shallow copy
-		this->size = other.size;
-		this->str = other.str;
-		//обнуляем принимаемый объект
-		other.size = 0;
-		other.str = nullptr;
-		cout << "MoveAssignment:\t\t" << this << endl;
-		return *this;
-	}
-	//            MOVE_METHODS
-	String (String&& other) noexcept : size(other.size), str(other.str)
-	{
-		//this->size = other.size;
-		//this->str = other.str;
-		//обнуляем принимаемый объект, д/т/ч предотвратить его удаление деструктором
-		other.size = 0;
-		other.str = nullptr;
-		cout << "MoveConstructor:\t\t" << this << endl;
-	}
-
-	~String()
-	{
-		delete[] str;
-		str = nullptr;
-		size = 0;
-		cout << "Destruktor:\t\t" << this << endl;
-	}
-
-	char operator[](int i) const
-	{
-		return str[i];
-	}
-
-	char& operator[](int i)
-	{
-		return str[i];
-	}
-
-	
-
-
+	int get_size() const;
+	const char* get_str() const;
+	char* get_str();
+	//Constructors
+	explicit String(int size = 80); //int size только в прототипе
+	String(const char* str);
+	String(const String& other);
+	String(String&& other) noexcept;
+	~String();
+	//Operators
+	String& operator=(const String& obj);
+	String& operator=(String&& other) noexcept;
+	char operator[](int i) const;
+	char& operator[](int i);
+	//Methods
+	void print() const;
 };
+//Начало определения класса
+int String::get_size() const
+{
+	return size;
+}
+
+const char* String::get_str() const
+{
+	return str;
+}
+
+char* String::get_str()
+{
+	return str;
+}
+
+String::String(int size) : size(size), str(new char[size] {})
+{
+	//this->size = size;
+	//this->str = new char[size] {};
+	cout << "DefaultConstruktor:\t" << this << endl;
+}
+
+void String::print() const
+{
+	cout << "Size:\t" << size << endl;
+	cout << "Str:\t" << str << endl;
+}
+
+String::String(const char* str) : String(strlen(str) + 1)
+{
+	//this->size = strlen(str) + 1;
+	//this->str = new char[size] {};
+	for (int i = 0; i < size; i++) this->str[i] = str[i];
+	cout << "SingleArgumentConstructor:\t" << this << endl;
+}
+
+String::String(const String& other) : String(other.str)
+{
+	//size = obj.size;
+	////this->str = obj.str; //Shallow copy
+	//str = new char[size];
+	//for (int i = 0; i < size; i++) str[i] = obj.str[i];
+	cout << "CopyConstructor:\t\t" << this << endl;
+}
+
+String& String::operator=(const String& obj)
+{
+	if (this == &obj) return *this;
+	this->~String();
+	size = obj.size;
+	//this->str = obj.str; //Shallow copy
+	str = new char[size];
+	for (int i = 0; i < size; i++) str[i] = obj.str[i];
+	cout << "CopyAssignment:\t\t" << this << endl;
+	return *this;
+}
+
+String& String::operator=(String&& other) noexcept
+{
+	//проверяем, что this != other
+	if (this == &other) return *this;
+	//удаляем старую динамич память
+	delete[] str;
+	//shallow copy
+	this->size = other.size;
+	this->str = other.str;
+	//обнуляем принимаемый объект
+	other.size = 0;
+	other.str = nullptr;
+	cout << "MoveAssignment:\t\t" << this << endl;
+	return *this;
+}
+//            MOVE_METHODS
+String::String(String&& other) noexcept : size(other.size), str(other.str)
+{
+	//this->size = other.size;
+	//this->str = other.str;
+	//обнуляем принимаемый объект, д/т/ч предотвратить его удаление деструктором
+	other.size = 0;
+	other.str = nullptr;
+	cout << "MoveConstructor:\t\t" << this << endl;
+}
+
+String::~String()
+{
+	delete[] str;
+	str = nullptr;
+	size = 0;
+	cout << "Destruktor:\t\t" << this << endl;
+}
+
+char String::operator[](int i) const
+{
+	return str[i];
+}
+
+char& String::operator[](int i)
+{
+	return str[i];
+}
+
 
 String operator+(const String& left, const String& right)
 {
@@ -141,7 +154,7 @@ std::ostream& operator<<(std::ostream& os, const String& obj)
 {
 	return os << obj.get_str();
 }
-
+//конец определения класса
 
 //#define CONSTRACTORS_CHECK 
 //#define COPY_SEMANTIC 
