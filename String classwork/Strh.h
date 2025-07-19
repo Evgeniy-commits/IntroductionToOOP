@@ -1,10 +1,6 @@
 #pragma once
 
 #include<iostream>
-//#include<cmath>
-//#include<string>
-//#include<conio.h>
-//#include<Windows.h>
 
 using namespace std;
 
@@ -36,8 +32,9 @@ public:
 	char& operator[](int i);
 	//Methods
 	void print() const;
-}; 
+	friend String operator+(const String& left, const String& right);
+	friend std::ostream& operator<<(std::ostream& os, const String& obj);
+};
 
-String operator+(const String& left, const String& right);
-std::ostream& operator<<(std::ostream& os, const String& obj);
+
 //конец объявления

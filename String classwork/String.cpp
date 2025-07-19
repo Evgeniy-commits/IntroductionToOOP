@@ -1,4 +1,4 @@
-#include"String.h"
+#include"Strh.h"
 
 //Начало определения класса
 int String::get_size() const

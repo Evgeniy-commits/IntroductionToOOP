@@ -1,4 +1,4 @@
-п»ї#include"String.h"
+#include<Strh.h>
 
 //#define CONSTRACTORS_CHECK 
 //#define COPY_SEMANTIC 
@@ -56,38 +56,38 @@ void main()
 	str1.print();
 
 	//String str2 = 5;
-	String str2(5); //С‚РѕР»СЊРєРѕ СЏРІРЅРѕ, С‚.Рє explicit
+	String str2(5); //только явно, т.к explicit
 	str2.print();
 
 	String str3 = "Hello"; //SingleArgument Constructor
 	str3.print();
 
-	String str4();  //Р’ СЌС‚РѕР№ СЃС‚СЂРѕРєРµ РІС‹Р·С‹РІР°РµС‚СЃСЏ DefaultConstructor
-	                //Р—РґРµСЃСЊ РѕР±СЉСЏРІР»СЏРµС‚СЃСЏ С„СѓРЅРєС†РёСЏ
-					//Рў.Рµ ( ) РЅРµ РґРµР»Р°СЋС‚ СЏРІРЅС‹Р№ РІС‹Р·РѕРІ РєРѕРЅСЃС‚СЂСѓРєС‚РѕСЂР° РїРѕ СѓРјРѕР»С‡Р°РЅРёСЋ
-					//Р•СЃР»Рё РµСЃС‚СЊ РЅРµРѕР±С…РѕРґРёРјРѕСЃС‚СЊ СЏРІРЅРѕ РІС‹Р·РІР°С‚СЊ РєРѕРЅСЃС‚СЂСѓРєС‚РѕСЂ РїРѕ СѓРјРѕР»С‡Р°РЅРёСЋ,
-	//str4 РЅРµ СЏРІР»СЏРµС‚СЃСЏ РѕР±СЉРµРєС‚РѕРј
-	String str5{};  //РЇРІРЅРѕ РІС‹Р·С‹РІР°РµС‚ Р”РµС„РѕР»С‚ РєРѕРЅСЃС‚СЂСѓРєС‚РѕСЂ
+	String str4();  //В этой строке вызывается DefaultConstructor
+	//Здесь объявляется функция
+	//Т.е ( ) не делают явный вызов конструктора по умолчанию
+	//Если есть необходимость явно вызвать конструктор по умолчанию,
+//str4 не является объектом
+	String str5{};  //Явно вызывает Дефолт конструктор
 	str5.print();
 
-	String str6{ 6 };  //РЇРІРЅРѕ РІС‹Р·С‹РІР°РµС‚ Р”РµС„РѕР»С‚ РєРѕРЅСЃС‚СЂСѓРєС‚РѕСЂ
+	String str6{ 6 };  //Явно вызывает Дефолт конструктор
 	str6.print();
 
-	String str7{ "World" };  //РЇРІРЅРѕ РІС‹Р·С‹РІР°РµС‚ Р”РµС„РѕР»С‚ РєРѕРЅСЃС‚СЂСѓРєС‚РѕСЂ
+	String str7{ "World" };  //Явно вызывает Дефолт конструктор
 	str7.print();
 
-	String str8 = str7;  //РІС‹Р·РѕРІ CopyConstructor
+	String str8 = str7;  //вызов CopyConstructor
 	str8.print();
 
-	String str9(str8);	//РІС‹Р·РѕРІ CopyConstructor
+	String str9(str8);	//вызов CopyConstructor
 	str9.print();
-	
-	String str10{ str9 };	//РІС‹Р·РѕРІ CopyConstructor
+
+	String str10{ str9 };	//вызов CopyConstructor
 	str10.print();
-	//Р¤РёРіСѓСЂРЅС‹Рµ СЃРєРѕР±РєРё РЅРµРѕР±С…РѕРґРёРјРѕ РёСЃРїРѕР»СЊР·РѕРІР°С‚СЊ СЃ Р±РѕР»СЊС€РѕР№ РѕСЃС‚РѕСЂРѕР¶РЅРѕСЃС‚СЊСЋ
+	//Фигурные скобки необходимо использовать с большой осторожностью
 
 	String str11 = str3 + str8;
 	str11.print();
-	cout << str11 << endl;	
+	cout << str11 << endl;
 }
 
