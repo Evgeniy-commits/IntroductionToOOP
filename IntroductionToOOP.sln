@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.12.35707.178
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "IntroductionToOOP", "IntroductionToOOP\IntroductionToOOP.vcxproj", "{93D8400F-1C13-4E31-8884-D5A0E5E58EE8}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Point", "IntroductionToOOP\IntroductionToOOP.vcxproj", "{93D8400F-1C13-4E31-8884-D5A0E5E58EE8}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "HW", "HW\HW.vcxproj", "{386CD445-0DED-449C-AADC-1D474D6905F4}"
 EndProject
@@ -18,6 +18,8 @@ EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Matrix", "Matrix\Matrix.vcxproj", "{90C549DE-D73D-4B21-A02C-17461E51ED90}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "LIBsPointCheck", "LIBsPointCheck\LIBsPointCheck.vcxproj", "{92176F57-7C34-47F2-88B3-71068F4D379A}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "LIBsFractionCheck", "LIBsFractionCheck\LIBsFractionCheck.vcxproj", "{BB897BFD-193C-4C2D-9303-51FE3AA43F76}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -91,6 +93,14 @@ Global
 		{92176F57-7C34-47F2-88B3-71068F4D379A}.Release|x64.Build.0 = Release|x64
 		{92176F57-7C34-47F2-88B3-71068F4D379A}.Release|x86.ActiveCfg = Release|Win32
 		{92176F57-7C34-47F2-88B3-71068F4D379A}.Release|x86.Build.0 = Release|Win32
+		{BB897BFD-193C-4C2D-9303-51FE3AA43F76}.Debug|x64.ActiveCfg = Debug|x64
+		{BB897BFD-193C-4C2D-9303-51FE3AA43F76}.Debug|x64.Build.0 = Debug|x64
+		{BB897BFD-193C-4C2D-9303-51FE3AA43F76}.Debug|x86.ActiveCfg = Debug|Win32
+		{BB897BFD-193C-4C2D-9303-51FE3AA43F76}.Debug|x86.Build.0 = Debug|Win32
+		{BB897BFD-193C-4C2D-9303-51FE3AA43F76}.Release|x64.ActiveCfg = Release|x64
+		{BB897BFD-193C-4C2D-9303-51FE3AA43F76}.Release|x64.Build.0 = Release|x64
+		{BB897BFD-193C-4C2D-9303-51FE3AA43F76}.Release|x86.ActiveCfg = Release|Win32
+		{BB897BFD-193C-4C2D-9303-51FE3AA43F76}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
