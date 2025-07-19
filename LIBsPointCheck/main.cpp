@@ -1,4 +1,4 @@
-#include "Point.h"
+#include <Point.h>
 
 //#define STRUCT_POINT
 //#define DISTANCE_CHECK
@@ -40,7 +40,7 @@ void main()
 	cout << "Расстояние между точками" << distance(A, B) << endl;
 	cout << delimiter << endl;
 #endif // DISTANCE_CHECK
-	
+
 #ifdef CONSTRUCTOR_CHECK
 	Point A;
 	A.print();
@@ -58,13 +58,13 @@ void main()
 	Point D = C; /// Copy constr
 	D.print();
 
-	Point E; 
+	Point E;
 	E = D;  // CopyAssignment
 	E.print();
 #endif // CONSTRUCTOR_CHECK
 
-	
-	
+
+
 #ifdef ASSIGNMENT_CHECK
 	int a, b, c;
 	a = b = c = 0;
@@ -93,5 +93,5 @@ void main()
 #endif // ARITHMETICAL_OPERATOR_CHECK
 
 	cout << (Point(2, 3) != Point(7, 8)) << endl;
-	
+
 }
